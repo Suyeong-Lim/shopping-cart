@@ -8,6 +8,7 @@ export const api = axios.create({
 
 //products
 export const getProduct = async () => {
-  const response = await api.get<Product>("/products");
-  return response;
+  const response = await api.get<Product[]>("http://localhost:3003/products");
+  return response.data;
 };
+
