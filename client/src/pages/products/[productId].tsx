@@ -8,7 +8,7 @@ const DetailPate = () => {
   //send a request to the backend API
   //to fetch the news item with itemId
 
-  return <div>?</div>;
+  return <div>{itemId}</div>;
 };
 
 export default DetailPate;
