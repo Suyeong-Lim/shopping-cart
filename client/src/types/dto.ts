@@ -1,6 +1,9 @@
 /*
   /products
 */
+export interface ProductDetail {
+  conItem: Product;
+}
 
 export interface Product {
   id: number;
