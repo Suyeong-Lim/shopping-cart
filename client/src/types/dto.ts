@@ -1,9 +1,6 @@
 /*
   /products
 */
-export interface ProductDetail {
-  conItem: Product;
-}
 
 export interface Product {
   id: number;
@@ -37,7 +34,7 @@ export interface PostCartRequest {
   /orders
 */
 
-export interface OrderDetail extends Product {
+https: export interface OrderDetail extends Product {
   quantity: number;
 }
 

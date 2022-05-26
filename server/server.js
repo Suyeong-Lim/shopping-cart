@@ -31,6 +31,7 @@ server.post("/products", (req, res) => {
 });
 
 server.post("/carts", (req, res) => {
+  console.log("req Body", req.body);
   const { product } = req.body;
   const { price, name, imageUrl } = product;
 

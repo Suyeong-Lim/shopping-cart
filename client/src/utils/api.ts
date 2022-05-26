@@ -25,6 +25,22 @@ export const getProductItem = async (itemId: string) => {
 // TODO: 삭제는 어케?
 
 //carts
-export const getCartItem = async () => {
-  const response = await api.get<Cart[]>("carts");
+export const getCartItems = async () => {
+  try {
+    const response = await api.get<Cart>("carts");
+    console.log("getCartItem API", response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const postCartItem = async (product: Product) => {
+  console.log("카트버튼click", product);
+  try {
+    const res = await api.post<Cart[]>("/carts", { product });
+    return res.data;
+  } catch {
+    console.log("product 추가 에러");
+  }
 };

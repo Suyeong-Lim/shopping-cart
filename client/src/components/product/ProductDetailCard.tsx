@@ -1,26 +1,19 @@
 import React from "react";
-import { Product } from "src/types/dto";
+import { Product, Cart } from "src/types/dto";
 import styled from "styled-components";
-import { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import * as cartSliceActions from "src/store/modules/cartSlice";
+import { postCartItem } from "src/utils/api";
 
 interface ItemProps {
   productItem: Product;
 }
 
 const ProductDetailCard = ({ productItem }: ItemProps) => {
-  const dispatch = useDispatch();
-  const value = useSelector(({ cartSlice }: any) => cartSlice.value);
-
-  const add = useCallback(
-    ({ value }: any) => {
-      dispatch(cartSliceActions.increment({ value }));
-    },
-    [dispatch]
-  );
-
   const { id, price, name, imageUrl } = productItem;
+
+  const addToCart = () => {
+    postCartItem(productItem);
+  };
+
   return (
     <ProductContainer>
       <Image src={imageUrl} />
@@ -29,8 +22,7 @@ const ProductDetailCard = ({ productItem }: ItemProps) => {
       <ProductPrice>
         금액 <div>{price} 원</div>
       </ProductPrice>
-      <span>{value}</span>
-      <CartButton onClick={() => add({ value })}>장바구니</CartButton>
+      <CartButton onClick={addToCart}>장바구니</CartButton>
     </ProductContainer>
   );
 };
