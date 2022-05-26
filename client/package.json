@@ -2,16 +2,25 @@
   "name": "shopping-cart",
   "version": "0.1.0",
   "private": true,
+  "main": "index.tsx",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "server:prepare": "cd ../server && yarn && cd ../client",
+    "server": "cd ../server && yarn server && cd ../client",
+    "server:first": "yarn server:prepare && yarn server"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "concurrently": "^7.2.0",
+    "json-server": "^0.17.0",
+    "ky": "^0.30.0",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-query": "^3.39.0",
     "styled-components": "^5.3.5",
     "styled-reset": "^4.3.4"
   },
