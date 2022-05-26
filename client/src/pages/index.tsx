@@ -2,7 +2,7 @@ import type { NextPage, GetServerSideProps } from "next";
 
 import { getProduct } from "src/utils/api";
 import { Product } from "src/types/dto";
-import ProductList from "src/components/ProductList";
+import ProductList from "src/components/product/ProductList";
 
 interface ProductProps {
   productList: Product[];

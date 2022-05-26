@@ -1,4 +1,4 @@
-import { Product, ProductDetail } from "src/types/dto";
+import { Product } from "src/types/dto";
 import { Cart } from "src/types/dto";
 import { API_ENDPOINT } from "./constants";
 import axios from "axios";
@@ -17,7 +17,7 @@ export const getProduct = async () => {
 //TODO: 상품 추가
 
 //상품 단일 조회
-export const getProductItem = async (itemId: number) => {
+export const getProductItem = async (itemId: string) => {
   const response = await api.get<Product>(`products/${itemId}`);
   return response.data;
 };

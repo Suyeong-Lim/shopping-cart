@@ -1,19 +1,44 @@
 import React from "react";
-import { useRouter } from "next/router";
-import Detail from "src/components/product/Detail";
+import { Product } from "src/types/dto";
+import { GetServerSideProps, NextPage } from "next";
+import { getProductItem } from "src/utils/api";
+import ProductDetailCard from "src/components/product/ProductDetailCard";
+import styled from "styled-components";
 
-const ProductDetail = () => {
-  const router = useRouter();
-  const id = router.query.productId;
+interface DetailProps {
+  productItem: Product;
+}
+// 1,2,3 => SSR product Item => Product (id,name,url)
 
-  //send a request to the backend API
-  //to fetch the news item with itemId
+const ProductDetail: NextPage<DetailProps> = ({ productItem }) => {
+  console.log(productItem);
 
   return (
-    <div>
-      <Detail itemId={id as string } />
-    </div>
+    <Container>{<ProductDetailCard productItem={productItem} />}</Container>
   );
+};
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+type ProductDetailParams = {
+  productId: string;
+};
+
+export const getServerSideProps: GetServerSideProps<
+  DetailProps,
+  ProductDetailParams
+> = async (context) => {
+  const { productId } = context.params!;
+  console.log(productId);
+
+  const data = await getProductItem(productId);
+
+  return {
+    props: { productItem: data },
+  };
 };
 
 export default ProductDetail;

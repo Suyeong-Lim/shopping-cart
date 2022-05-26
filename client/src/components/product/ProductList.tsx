@@ -9,8 +9,8 @@ interface ProductListProps {
 const ProductList: React.FC<ProductListProps> = ({ productList }) => {
   return (
     <Container>
-      {productList.map((product, idx) => {
-        return <ProductItem product={product} />;
+      {productList.map((product) => {
+        return <ProductItem key={product.id} product={product} />;
       })}
     </Container>
   );
