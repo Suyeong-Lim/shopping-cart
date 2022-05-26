@@ -34,7 +34,7 @@ export interface PostCartRequest {
   /orders
 */
 
-https: export interface OrderDetail extends Product {
+export interface OrderDetail extends Product {
   quantity: number;
 }
 

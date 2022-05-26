@@ -30,8 +30,11 @@ server.post("/products", (req, res) => {
   }
 });
 
+server.get("/carts", (req, res) => {
+  res.send(JSON.stringify(db.get("carts")));
+});
+
 server.post("/carts", (req, res) => {
-  console.log("req Body", req.body);
   const { product } = req.body;
   const { price, name, imageUrl } = product;
 

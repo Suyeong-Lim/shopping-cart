@@ -11,6 +11,7 @@ const ProductDetailCard = ({ productItem }: ItemProps) => {
   const { id, price, name, imageUrl } = productItem;
 
   const addToCart = () => {
+    console.log("상품 추가!!")
     postCartItem(productItem);
   };
 

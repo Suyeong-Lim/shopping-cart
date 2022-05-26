@@ -28,7 +28,7 @@ export const getProductItem = async (itemId: string) => {
 export const getCartItems = async () => {
   try {
     const response = await api.get<Cart>("carts");
-    console.log("getCartItem API", response.data);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -36,9 +36,8 @@ export const getCartItems = async () => {
 };
 
 export const postCartItem = async (product: Product) => {
-  console.log("카트버튼click", product);
   try {
-    const res = await api.post<Cart[]>("/carts", { product });
+    const res = await api.post<Cart>("/carts", { product });
     return res.data;
   } catch {
     console.log("product 추가 에러");

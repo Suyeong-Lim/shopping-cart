@@ -8,14 +8,20 @@ interface CartProps {
 }
 
 const CartListPage: NextPage<CartProps> = ({ cartListData }) => {
-  console.log("hello", cartListData);
-  // const { id, name, price } = cartListData;
-  return <div>{cartListData.length}</div>;
+  console.log("CartListPage", cartListData);
+  return (
+    <div>
+      {cartListData.map((item) => {
+        return <div>{item.product.name}</div>;
+      })}
+    </div>
+  );
 };
 
+// 문제:
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const cartData = await getCartItems();
-  console.log("cartLOGLOGLOGLOGLOGLOGLGO", cartData);
+  console.log("ServerSide", cartData);
   return {
     props: {
       cartListData: cartData,

@@ -3,7 +3,6 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyles from "src/styles/GlobalStyles";
 import theme from "src/styles/theme";
 import Gnb from "src/components/gnb/Gnb";
-import { wrapper } from "src/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -15,4 +14,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;
