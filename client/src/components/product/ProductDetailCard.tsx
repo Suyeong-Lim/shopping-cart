@@ -11,8 +11,21 @@ const ProductDetailCard = ({ productItem }: ItemProps) => {
   const { id, price, name, imageUrl } = productItem;
 
   const addToCart = () => {
-    console.log("상품 추가!!")
+    console.log("상품 추가!!");
+    
+    
+    //수량  +1
+    //
     postCartItem(productItem);
+
+    // 있으면 => 수량 (quantity) +1
+    // 없으면 => postCartItem()
+    //id만 하는게 좋다. 결합도 낮추기. (근데 명세가 ㅎ;; id 보내서 카트에서는 api 분해해서 쓰기)
+    //id 만 담도록. 상태를 동적으로 가지지 않게 해얗..? 옵저버 패턴
+    //마넌에서 만오처넌 바뀌면 ?.? ㅋㅋㅋ아
+    //사용자의 장바구니에선 마넌인데, 반영이 안되는 문제가 생긴다.
+    // 사용자 장바구니 데이터 서칭해서 업데이트 해야하는데
+    // 불필요한 데이터 다 업데이트 치는.. 그거임.. 안티 패턴
   };
 
   return (

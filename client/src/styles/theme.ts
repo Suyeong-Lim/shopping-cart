@@ -30,6 +30,7 @@ export const colors = {
 };
 
 export const fontSize = {
+  bigTitle: "20px",
   title: "16px",
   text: "14px",
   smallText: "12px",

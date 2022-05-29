@@ -36,7 +36,7 @@ server.get("/carts", (req, res) => {
 
 server.post("/carts", (req, res) => {
   const { product } = req.body;
-  const { price, name, imageUrl } = product;
+  const { price, name, imageUrl, quantity } = product;
 
   if (
     !Number.isInteger(price) ||

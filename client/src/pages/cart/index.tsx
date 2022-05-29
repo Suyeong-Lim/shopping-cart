@@ -2,6 +2,9 @@ import React from "react";
 import type { NextPage, GetServerSideProps } from "next";
 import { getCartItems } from "src/utils/api";
 import { Cart } from "src/types/dto";
+import styled from "styled-components";
+import CartList from "src/components/cart/CartList";
+import { QueryClient, Hydrate, dehydrate } from "react-query";
 
 interface CartProps {
   cartListData: Cart[];
@@ -10,21 +13,21 @@ interface CartProps {
 const CartListPage: NextPage<CartProps> = ({ cartListData }) => {
   console.log("CartListPage", cartListData);
   return (
-    <div>
-      {cartListData.map((item) => {
-        return <div>{item.product.name}</div>;
-      })}
-    </div>
+    <>
+      <CartList />
+    </>
   );
 };
 
 // 문제:
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const cartData = await getCartItems();
-  console.log("ServerSide", cartData);
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery("/carts", getCartItems);
+
   return {
     props: {
-      cartListData: cartData,
+      dehydrateState: dehydrate(queryClient),
     },
   };
 };

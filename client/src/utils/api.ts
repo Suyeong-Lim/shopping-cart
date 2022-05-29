@@ -22,12 +22,10 @@ export const getProductItem = async (itemId: string) => {
   return response.data;
 };
 
-// TODO: 삭제는 어케?
-
 //carts
 export const getCartItems = async () => {
   try {
-    const response = await api.get<Cart>("carts");
+    const response = await api.get<Cart[]>("carts");
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -41,5 +39,16 @@ export const postCartItem = async (product: Product) => {
     return res.data;
   } catch {
     console.log("product 추가 에러");
+  }
+};
+
+// TODO: 삭제는 어케?
+
+export const deleteCartItem = async (id: number) => {
+  try {
+    const res = await api.delete<Cart>(`/products/${id}`);
+    return res.data;
+  } catch {
+    console.log("삭제 에러");
   }
 };

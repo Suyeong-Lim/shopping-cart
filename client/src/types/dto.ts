@@ -9,10 +9,9 @@ export interface Product {
   imageUrl: string;
 }
 
-export interface GetProdutResponse extends Product {}
-
-export interface PostProductRequest {
-  product: Omit<Product, "id">;
+export interface CartItem extends Product {
+  quantity: number;
+  selected: boolean;
 }
 
 /*
@@ -24,12 +23,10 @@ export interface Cart {
   product: Product;
 }
 
-export interface GetCartResponse extends Cart {}
-
-export interface PostCartRequest {
-  product: Product;
+export interface CartWithQuntity {
+  id: number;
+  product: CartItem;
 }
-
 /*
   /orders
 */
