@@ -3,6 +3,7 @@ import { Product } from "src/types/dto";
 import styled from "styled-components";
 import Link from "next/link";
 import { URL } from "src/utils/url";
+import { convertName, convertPrice } from "./hooks/useConvert";
 
 interface Props {
   product: Product;
@@ -17,9 +18,9 @@ const ProductItem: React.FC<Props> = ({ product }) => {
         <Image src={imageUrl} />
       </Link>
       <InfoContainer>
-        <Name>{name}</Name>
+        <Name>{convertName(name)}</Name>
         <Price>
-          {price} <span>원</span>
+          {convertPrice(price)} <span>원</span>
         </Price>
       </InfoContainer>
     </Container>
@@ -34,8 +35,8 @@ const Container = styled.div`
 `;
 
 const Image = styled.img`
-  width: 17.625rem;
-  height: 17.625rem;
+  width: 13.6rem;
+  height: 11.6rem;
   cursor: pointer;
 `;
 
