@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { URL } from "src/utils/url";
 import { convertName, convertPrice } from "./hooks/useConvert";
-
+import { BsCart4 } from "react-icons/bs";
 interface Props {
   product: Product;
 }
@@ -15,13 +15,16 @@ const ProductItem: React.FC<Props> = ({ product }) => {
   return (
     <Container>
       <Link href={URL.PRODUCT_DETAIL(id)} passHref>
-        <Image src={imageUrl} />
+        <img src={imageUrl} />
       </Link>
       <InfoContainer>
-        <Name>{convertName(name)}</Name>
-        <Price>
-          {convertPrice(price)} <span>원</span>
-        </Price>
+        <Info>
+          <Name>{convertName(name)}</Name>
+          <Price>{convertPrice(price)} 원</Price>
+        </Info>
+        <CartButton>
+          <BsCart4 size={30} />
+        </CartButton>
       </InfoContainer>
     </Container>
   );
@@ -30,29 +33,40 @@ const ProductItem: React.FC<Props> = ({ product }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid blue;
-  gap: 1rem;
-`;
-
-const Image = styled.img`
-  width: 13.6rem;
-  height: 11.6rem;
+  width: 282px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   padding: 10px;
 `;
 
-const Name = styled.span`
-  font-size: ${({ theme }) => theme.fontSize.text};
+const Info = styled.div`
+  flex: 9;
+  padding: 10px 15px;
 `;
 
-const Price = styled.span`
+const Name = styled.div`
   font-size: ${({ theme }) => theme.fontSize.title};
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  height: 21px;
 `;
 
+const Price = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.text};
+  font-weight: 500;
+`;
+
+const CartButton = styled.button`
+  flex: 1;
+  padding: 15px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.ORANGE_700};
+    color: ${({ theme }) => theme.colors.WHITE};
+  }
+`;
 export default ProductItem;

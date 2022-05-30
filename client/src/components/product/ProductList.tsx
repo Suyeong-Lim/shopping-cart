@@ -18,10 +18,8 @@ const ProductList: React.FC<ProductListProps> = ({ productList }) => {
 
 const Container = styled.div`
   display: flex;
-  border: 1px solid brown;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 3rem 5rem;
   gap: 3rem;
 `;
 
