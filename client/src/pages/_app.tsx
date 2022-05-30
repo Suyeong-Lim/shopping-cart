@@ -6,6 +6,7 @@ import theme from "src/styles/theme";
 import Gnb from "src/components/gnb/Gnb";
 import { QueryClientProvider, QueryClient, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import Layout from "src/components/Layout/Layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
@@ -15,8 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <Gnb />
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </Hydrate>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
