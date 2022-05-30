@@ -21,11 +21,13 @@ const Gnb = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 3rem;
+  height: 4rem;
   background-color: ${({ theme }) => theme.colors.GNB};
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: fixed;
+  top: 0px;
 `;
 
 const LogoContainer = styled.div``;
