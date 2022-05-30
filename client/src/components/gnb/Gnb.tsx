@@ -26,6 +26,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: fixed;
+  top: 0px;
 `;
 
 const LogoContainer = styled.div``;
