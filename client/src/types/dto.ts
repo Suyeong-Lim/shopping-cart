@@ -9,14 +9,15 @@ export interface Product {
   imageUrl: string;
 }
 
+/*
+  /carts
+*/
+
 export interface CartItem extends Product {
   quantity: number;
   selected: boolean;
 }
 
-/*
-  /carts
-*/
 
 export interface Cart {
   id: number;
@@ -27,6 +28,7 @@ export interface CartWithQuntity {
   id: number;
   product: CartItem;
 }
+
 /*
   /orders
 */
