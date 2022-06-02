@@ -6,21 +6,7 @@ import { useQuery } from "react-query";
 import { getCartItems } from "src/services/api";
 
 const CartList: React.FC = () => {
-  const [cartItemList, setCartItemList] = useState<Cart[]>([]);
   const { data } = useQuery("/carts", getCartItems);
-
-  useEffect(() => {
-    if (data) {
-      setCartItemList(data);
-    }
-  }, [data]);
-
-  
-  //1. 동기화 포기하기
-  //2. 제이슨 서버의 스키마를 바꿔서 퀀티티를 추가한다.
-
-  // TODO: 데이터 패칭 시에 필터링해서 동일한 제품일 경우에 수량을 올려준다
-  // 수량 계산이 완료된 객체의 배열을 반환
 
   return (
     <CartContainer>
@@ -31,8 +17,8 @@ const CartList: React.FC = () => {
 
       <CartWrapper>
         <div>
-          {cartItemList &&
-            cartItemList.map((cartItem) => {
+          {data &&
+            data.map((cartItem) => {
               return <CartItems key={cartItem.id} Item={cartItem} />;
             })}
         </div>

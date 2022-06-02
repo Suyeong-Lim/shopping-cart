@@ -43,7 +43,7 @@ export const addCartItem = async (product: Product) => {
 };
 
 export const updateCartItem = async (cartId: number, quantity: number) => {
-  const data = await api.patch(`/carts/quantity/${cartId}`, { quantity });
+  const data = await api.patch(`/carts/${cartId}/quantity`, { quantity });
   return data;
 };
 

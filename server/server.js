@@ -27,7 +27,6 @@ server.get("/products", (req, res) => {
 /** 특정 상품 조회 */
 server.get("/products/:productId", (req, res) => {
   const { productId } = req.params;
-  console.log(typeof productId, productId);
 
   if (!Number(productId)) {
     return res.sendStatus(400);
@@ -205,7 +204,6 @@ server.delete("/carts/:cartId", (req, res) => {
 
   const result = db.get("carts").splice(targetIdx, 1).write();
 
-  console.log(result);
 
   res.sendStatus(200);
 });

@@ -3,12 +3,20 @@ import { Cart, CartItem } from "src/types/dto";
 import styled from "styled-components";
 import { deleteCartItem } from "src/services/api";
 import { addCartItem } from "src/services/api";
+import { useCartMutation } from "./hook/useCartMutation";
 
 interface Props {
   Item: Cart;
 }
 
 const CartItems: React.FC<Props> = ({ Item }) => {
+  const { plus, minus, drop } = useCartMutation(Item);
+
+  const onClickHandler = () => {
+    if (1 < Item.product.quantity) {
+      minus();
+    }
+  };
 
   return (
     <Container>
@@ -19,11 +27,11 @@ const CartItems: React.FC<Props> = ({ Item }) => {
       </LeftContainer>
 
       <RightContainer>
-        <DeleteButton>X</DeleteButton>
+        <DeleteButton onClick={() => drop()}>X</DeleteButton>
         <div>
           <span>{Item.product.quantity}</span>
-          <Button onClick={}>+</Button>
-          <Button onClick={}>-</Button>
+          <Button onClick={() => plus()}>+</Button>
+          <Button onClick={() => onClickHandler()}>-</Button>
         </div>
 
         <div>{Item.product.price} 원</div>
