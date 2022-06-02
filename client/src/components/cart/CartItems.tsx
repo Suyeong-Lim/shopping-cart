@@ -1,35 +1,32 @@
-import React from "react";
-import { CartWithQuntity } from "src/types/dto";
+import React, { useEffect, useState } from "react";
+import { Cart, CartItem } from "src/types/dto";
 import styled from "styled-components";
-import { deleteCartItem } from "src/utils/api";
+import { deleteCartItem } from "src/services/api";
+import { addCartItem } from "src/services/api";
 
 interface Props {
-  cartItem: CartWithQuntity;
+  Item: Cart;
 }
 
-const CartItem: React.FC<Props> = ({ cartItem }) => {
-  const deleteToCart = (id: number) => {
-    console.log("상품 삭제");
-    deleteCartItem(id);
-  };
+const CartItems: React.FC<Props> = ({ Item }) => {
 
   return (
     <Container>
       <input type="checkbox" />
       <LeftContainer>
-        <Image src={cartItem.product.imageUrl} />
-        <span>{cartItem.product.name}</span>
+        <Image src={Item.product.imageUrl} />
+        <span>{Item.product.name}</span>
       </LeftContainer>
 
       <RightContainer>
         <DeleteButton>X</DeleteButton>
         <div>
-          <span>{cartItem.product.quantity}</span>
-          <Button>+</Button>
-          <Button>-</Button>
+          <span>{Item.product.quantity}</span>
+          <Button onClick={}>+</Button>
+          <Button onClick={}>-</Button>
         </div>
 
-        <div>{cartItem.product.price} 원</div>
+        <div>{Item.product.price} 원</div>
       </RightContainer>
     </Container>
   );
@@ -69,4 +66,4 @@ const RightContainer = styled.div`
   align-items: center;
   justify-content: space-evenly;
 `;
-export default CartItem;
+export default CartItems;

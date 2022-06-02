@@ -1,6 +1,6 @@
 import { Product } from "src/types/dto";
-import { Cart } from "src/types/dto";
-import { API_ENDPOINT } from "./constants";
+import { Cart, CartItem } from "src/types/dto";
+import { API_ENDPOINT } from "../utils/constants";
 import axios from "axios";
 
 export const api = axios.create({
@@ -33,20 +33,23 @@ export const getCartItems = async () => {
   }
 };
 
-export const postCartItem = async (product: Product) => {
+export const addCartItem = async (product: Product) => {
   try {
-    const res = await api.post<Cart>("/carts", { product });
+    const res = await api.post<Product>("/carts", { product });
     return res.data;
   } catch {
     console.log("product 추가 에러");
   }
 };
 
-// TODO: 삭제는 어케?
+export const updateCartItem = async (cartId: number, quantity: number) => {
+  const data = await api.patch(`/carts/quantity/${cartId}`, { quantity });
+  return data;
+};
 
-export const deleteCartItem = async (id: number) => {
+export const deleteCartItem = async (cartId: number) => {
   try {
-    const res = await api.delete<Cart>(`/products/${id}`);
+    const res = await api.delete(`/carts/${cartId}`);
     return res.data;
   } catch {
     console.log("삭제 에러");
