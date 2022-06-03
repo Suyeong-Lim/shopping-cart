@@ -125,7 +125,22 @@ server.patch("/carts", (req, res) => {
   res.sendStatus(200);
 });
 
-/** 특정 카트의 선택 여부 변경 */
+/** 전체 카트 선택 여부 변경 **/
+server.patch("/carts/selected", (req, res) => {
+  const { selected } = req.body;
+
+  if (typeof selected !== "boolean") {
+    return res.sendStatus(400);
+  }
+  db.get("carts")
+    .forEach((cart) => {
+      cart.product.selected = selected;
+    })
+    .write();
+  res.sendStatus(200);
+});
+
+/** 특정 카트의 선택 여부 변경 **/
 server.patch("/carts/:cartId/selected", (req, res) => {
   const { selected } = req.body;
   const { cartId } = req.params;
@@ -185,7 +200,7 @@ server.patch("/carts/:cartId/quantity", (req, res) => {
 
   res.sendStatus(200);
 });
-
+/* 특정 카트 삭제 */
 server.delete("/carts/:cartId", (req, res) => {
   const { cartId } = req.params;
 
@@ -204,9 +219,10 @@ server.delete("/carts/:cartId", (req, res) => {
 
   const result = db.get("carts").splice(targetIdx, 1).write();
 
-
   res.sendStatus(200);
 });
+
+/* */
 
 /**
  * Orders

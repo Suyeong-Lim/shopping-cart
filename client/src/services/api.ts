@@ -55,3 +55,19 @@ export const deleteCartItem = async (cartId: number) => {
     console.log("삭제 에러");
   }
 };
+
+export const updateCartSelected = async (cartId: number, selected: boolean) => {
+  const data = await api.patch(`/carts/${cartId}/selected`, { selected });
+  return data;
+};
+
+export const updatedSelectedAll = async (selected: boolean) => {
+  const data = await api.patch("/carts/selected", { selected });
+  return data;
+};
+
+export const deleteSelctedCarts = async (cartIdList: number[]) => {
+  const cartIdListString = cartIdList.join(",");
+  const data = await api.delete(`/carts?deleteItems=${cartIdListString}`);
+  return data;
+};
