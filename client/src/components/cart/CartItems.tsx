@@ -4,12 +4,14 @@ import styled from "styled-components";
 import { deleteCartItem } from "src/services/api";
 import { addCartItem } from "src/services/api";
 import { useCartMutation } from "./hook/useCartMutation";
+import { convertPrice } from "src/utils/convertPrice";
 
 interface Props {
   Item: Cart;
 }
 
 const CartItems: React.FC<Props> = ({ Item }) => {
+  const { name, imageUrl, price, quantity, selected } = Item.product;
   const { plus, minus, drop } = useCartMutation(Item);
 
   const onClickHandler = () => {
@@ -22,19 +24,19 @@ const CartItems: React.FC<Props> = ({ Item }) => {
     <Container>
       <input type="checkbox" />
       <LeftContainer>
-        <Image src={Item.product.imageUrl} />
-        <span>{Item.product.name}</span>
+        <Image src={imageUrl} />
+        <span>{name}</span>
       </LeftContainer>
 
       <RightContainer>
         <DeleteButton onClick={() => drop()}>X</DeleteButton>
         <div>
-          <span>{Item.product.quantity}</span>
+          <span>{quantity}</span>
           <Button onClick={() => plus()}>+</Button>
           <Button onClick={() => onClickHandler()}>-</Button>
         </div>
 
-        <div>{Item.product.price} 원</div>
+        <div>{convertPrice(price * quantity)} 원</div>
       </RightContainer>
     </Container>
   );
