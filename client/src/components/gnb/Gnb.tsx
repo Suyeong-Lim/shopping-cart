@@ -26,7 +26,7 @@ const Wrapper = styled.header`
   position: fixed;
   width: 100%;
   height: 70px;
-  background-color: ${({ theme }) => theme.colors.GNB};
+  background-color: ${({ theme }) => theme.colors.MINT_BLUE};
 `;
 
 const Container = styled.div`

@@ -1,6 +1,6 @@
 import React from "react";
 import type { NextPage, GetServerSideProps } from "next";
-import { getCartItems } from "src/utils/api";
+import { getCartItems } from "src/services/api";
 import { Cart } from "src/types/dto";
 import styled from "styled-components";
 import CartList from "src/components/cart/CartList";
