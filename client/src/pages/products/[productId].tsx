@@ -1,18 +1,15 @@
 import React from "react";
 import { Product } from "src/types/dto";
 import { GetServerSideProps, NextPage } from "next";
-import { getProductItem } from "src/utils/api";
+import { getProductItem } from "src/services/api";
 import ProductDetailCard from "src/components/product/ProductDetailCard";
 import styled from "styled-components";
 
 interface DetailProps {
   productItem: Product;
 }
-// 1,2,3 => SSR product Item => Product (id,name,url)
 
 const ProductDetail: NextPage<DetailProps> = ({ productItem }) => {
-  console.log(productItem);
-
   return (
     <Container>{<ProductDetailCard productItem={productItem} />}</Container>
   );

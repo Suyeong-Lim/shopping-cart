@@ -1,8 +1,9 @@
 import type { NextPage, GetServerSideProps } from "next";
-
-import { getProduct } from "src/utils/api";
+import { getProduct } from "src/services/api";
 import { Product } from "src/types/dto";
 import ProductList from "src/components/product/ProductList";
+import styled from "styled-components";
+import Breakpoints from "src/styles/breakpoints";
 
 interface ProductProps {
   productList: Product[];
@@ -10,13 +11,13 @@ interface ProductProps {
 
 const Home: NextPage<ProductProps> = ({ productList }) => {
   return (
-    <div>
+    <Conatiner>
       {productList.length === 0 ? (
         <div>Loading</div>
       ) : (
         <ProductList productList={productList} />
       )}
-    </div>
+    </Conatiner>
   );
 };
 
@@ -30,4 +31,9 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   };
 };
 
+const Conatiner = styled.div`
+  display: flex;
+  align-items: center;
+  width: ${Breakpoints.xlarge}px;
+`;
 export default Home;

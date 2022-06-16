@@ -12,19 +12,12 @@ export interface Product {
 /*
   /carts
 */
-
 export interface CartItem extends Product {
   quantity: number;
   selected: boolean;
 }
 
-
 export interface Cart {
-  id: number;
-  product: Product;
-}
-
-export interface CartWithQuntity {
   id: number;
   product: CartItem;
 }
@@ -33,17 +26,11 @@ export interface CartWithQuntity {
   /orders
 */
 
-export interface OrderDetail extends Product {
+export interface OrderItem extends Product {
   quantity: number;
 }
 
 export interface Order {
   id: number;
-  orderDetails: OrderDetail[];
-}
-
-export interface GetOrderResponse extends Order {}
-
-export interface PostOrderResponse {
-  orderDetails: OrderDetail[];
+  orderDetails: OrderItem[];
 }

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Breakpoints from "src/styles/breakpoints";
 import Gnb from "src/components/gnb/Gnb";
+import media from "src/styles/media";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -21,6 +22,14 @@ const Container = styled.div`
   padding: 120px 20px;
   max-width: ${Breakpoints.xlarge}px;
   min-width: ${Breakpoints.small}px;
+
+  ${media.xlarge} {
+    width: ${Breakpoints.large}px;
+  }
+
+  ${media.large} {
+    width: ${Breakpoints.small}px;
+  }
 `;
 
 export default Layout;

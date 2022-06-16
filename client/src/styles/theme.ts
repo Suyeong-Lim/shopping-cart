@@ -24,9 +24,10 @@ export const colors = {
   ORANGE_700: "#F37D3B",
   GOLD_400: "#CBBA64",
   YELLOW_500: "#FBCD58",
-  MINT_500: "#04C09E",
+  MINT_300: "#A5DEDC",
+  MINT_500: "#22A6A2",
   CYAN_300: "#94DACD",
-  GNB: "#2ac1bc",
+  MINT_BLUE: "#2ac1bc",
 };
 
 export const fontSize = {

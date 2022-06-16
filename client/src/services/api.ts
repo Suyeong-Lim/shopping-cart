@@ -47,6 +47,7 @@ export const updateCartItem = async (cartId: number, quantity: number) => {
   return data;
 };
 
+//단일 카트 아이템 삭제
 export const deleteCartItem = async (cartId: number) => {
   try {
     const res = await api.delete(`/carts/${cartId}`);
@@ -54,4 +55,21 @@ export const deleteCartItem = async (cartId: number) => {
   } catch {
     console.log("삭제 에러");
   }
+};
+
+export const updateCartSelected = async (cartId: number, selected: boolean) => {
+  const data = await api.patch(`/carts/${cartId}/selected`, { selected });
+  return data;
+};
+
+export const updatedSelectedAll = async (selected: boolean) => {
+  const data = await api.patch("/carts/selected", { selected });
+  return data;
+};
+
+// 다수의 카트 삭제
+export const deleteCarts = async (cartIdList: number[]) => {
+  const cartIdListString = cartIdList.join(",");
+  const data = await api.delete(`/carts?deleteItems=${cartIdListString}`);
+  return data;
 };

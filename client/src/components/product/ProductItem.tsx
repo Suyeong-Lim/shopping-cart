@@ -1,16 +1,27 @@
 import React from "react";
-import { Product } from "src/types/dto";
 import styled from "styled-components";
 import Link from "next/link";
 import { URL } from "src/utils/url";
-import { convertName, convertPrice } from "./hooks/useConvert";
+import { Product } from "src/types/dto";
+import { convertName, convertPrice } from "./hook/useConvert";
 import { BsCart4 } from "react-icons/bs";
+import { useCartMutation } from "../../hooks/useCartItemMutation";
+import { useQuery } from "react-query";
+
 interface Props {
   product: Product;
 }
 
 const ProductItem: React.FC<Props> = ({ product }) => {
   const { id, name, price, imageUrl } = product;
+
+  const { addCart } = useCartMutation();
+
+  const addCartHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!product) return;
+    addCart(product);
+  };
 
   return (
     <Container>
@@ -22,7 +33,7 @@ const ProductItem: React.FC<Props> = ({ product }) => {
           <Name>{convertName(name)}</Name>
           <Price>{convertPrice(price)} 원</Price>
         </Info>
-        <CartButton>
+        <CartButton onClick={addCartHandler}>
           <BsCart4 size={30} />
         </CartButton>
       </InfoContainer>
