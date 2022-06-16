@@ -47,6 +47,7 @@ export const updateCartItem = async (cartId: number, quantity: number) => {
   return data;
 };
 
+//단일 카트 아이템 삭제
 export const deleteCartItem = async (cartId: number) => {
   try {
     const res = await api.delete(`/carts/${cartId}`);
@@ -66,7 +67,8 @@ export const updatedSelectedAll = async (selected: boolean) => {
   return data;
 };
 
-export const deleteSelctedCarts = async (cartIdList: number[]) => {
+// 다수의 카트 삭제
+export const deleteCarts = async (cartIdList: number[]) => {
   const cartIdListString = cartIdList.join(",");
   const data = await api.delete(`/carts?deleteItems=${cartIdListString}`);
   return data;
