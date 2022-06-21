@@ -1,5 +1,4 @@
-import { Product } from "src/types/dto";
-import { Cart, CartItem } from "src/types/dto";
+import { Product, Cart, Order, OrderItem } from "src/types/dto";
 import { API_ENDPOINT } from "../utils/constants";
 import axios from "axios";
 
@@ -26,11 +25,8 @@ export const getProductItem = async (itemId: string) => {
 export const getCartItems = async () => {
   try {
     const response = await api.get<Cart[]>("carts");
-    console.log(response.data);
     return response.data;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const addCartItem = async (product: Product) => {
@@ -47,6 +43,12 @@ export const updateCartItem = async (cartId: number, quantity: number) => {
   return data;
 };
 
+// 다수의 카트 삭제
+export const deleteCarts = async (cartIdList: number[]) => {
+  const cartIdListString = cartIdList.join(",");
+  const data = await api.delete(`/carts?deleteItems=${cartIdListString}`);
+  return data;
+};
 //단일 카트 아이템 삭제
 export const deleteCartItem = async (cartId: number) => {
   try {
@@ -67,9 +69,24 @@ export const updatedSelectedAll = async (selected: boolean) => {
   return data;
 };
 
-// 다수의 카트 삭제
-export const deleteCarts = async (cartIdList: number[]) => {
+export const deleteSelectedCarts = async (cartIdList: number[]) => {
   const cartIdListString = cartIdList.join(",");
-  const data = await api.delete(`/carts?deleteItems=${cartIdListString}`);
+  const data = await api.delete(`carts?deleteItems=${cartIdListString}`);
+  return data;
+};
+
+/**주문 order-services */
+
+export const getOrderList = async () => {
+  const data = await api.get<Order[]>("/orders");
+  return data;
+};
+
+export const getOrderItem = async (orderId: string) => {
+  const data = await api.get<Order>(`/olders/${orderId}`);
+};
+
+export const addOrder = async (orderDetails: OrderItem[]) => {
+  const data = await api.post<OrderItem[]>(`/orders`, { orderDetails });
   return data;
 };
