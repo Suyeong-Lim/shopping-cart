@@ -3,7 +3,8 @@ import {
   deleteCarts,
   updateCartSelected,
   updatedSelectedAll,
-} from "../services/api";
+  deleteSelectedCarts,
+} from "../../services/api";
 import { useMutation, useQueryClient } from "react-query";
 import { deleteCartItem, updateCartItem } from "src/services/api";
 import { Cart, Product } from "src/types/dto";
@@ -36,9 +37,8 @@ export const useCartMutation = () => {
   );
 
   // 카트에 넣는 mutation
-  const addCartMutation = useMutation(
-    (productItem: Product) => addCartItem(productItem),
-    afterMutaitionHandler
+  const addCartMutation = useMutation((productItem: Product) =>
+    addCartItem(productItem)
   );
 
   const deleteCartItemMutation = useMutation(
@@ -56,6 +56,11 @@ export const useCartMutation = () => {
     afterMutaitionHandler
   );
 
+  const deleteSelectedCartItemMutation = useMutation(
+    (cartId: number[]) => deleteSelectedCarts(cartId),
+    afterMutaitionHandler
+  );
+
   return {
     plus: (cartItem: Cart) => increaseQuantityMutation.mutate(cartItem),
     minus: (cartItem: Cart) => decreaseQuantityMutation.mutate(cartItem),
@@ -67,5 +72,7 @@ export const useCartMutation = () => {
     drop: (cartItem: Cart) => deleteCartItemMutation.mutate(cartItem),
     deleteCartList: (cartIdList: number[]) =>
       deleteCartListMutation.mutate(cartIdList),
+    deleteSelectedCartItem: (cartId: number[]) =>
+      deleteSelectedCartItemMutation.mutate(cartId),
   };
 };
