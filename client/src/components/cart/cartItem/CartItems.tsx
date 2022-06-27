@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Cart, CartItem } from "src/types/dto";
 import styled from "styled-components";
-import { useCartMutation } from "../../hooks/useCartItemMutation";
-import { convertPrice } from "src/utils/convertPrice";
-import Checkbox from "../common/Checkbox";
+import { useCartMutation } from "../../../hooks/api/useCartMutation";
+import { convertPrice } from "src/hooks/useConvert";
+import Checkbox from "../../common/Checkbox";
 import theme from "src/styles/theme";
 import { BsTrash } from "react-icons/bs";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
@@ -40,7 +40,7 @@ const CartItems: React.FC<Props> = ({ Item }) => {
           aria-label={`${name} 상품 삭제하기`}
           onClick={() => drop(Item)}
         >
-          <BsTrash size={20} fill={theme.colors.GRAY_300} />
+          <BsTrash size={20} fill={theme.colors.BLACK_TEXT} />
         </DeleteButton>
 
         <QuantityContainer>
@@ -64,14 +64,15 @@ const CartItems: React.FC<Props> = ({ Item }) => {
 const Container = styled.div`
   display: flex;
   border-bottom: 1px solid #111;
+  justify-content: space-between;
 `;
 
 const LeftContainer = styled.div`
-  width: 500px;
   display: flex;
-  align-items: center;
   span {
+    font-size: ${({ theme }) => theme.fontSize.title};
     margin-left: 20px;
+    margin-top: 8px;
   }
   padding: 20px;
 `;
@@ -87,6 +88,9 @@ const Button = styled.button`
 `;
 const DeleteButton = styled.button`
   cursor: pointer;
+  &:hover {
+    background-color: #ff7e64b5;
+  }
 `;
 
 const Image = styled.img`
@@ -104,7 +108,7 @@ const Quantity = styled.div`
   width: 73px;
   height: 44px;
   font-size: ${theme.fontSize.title};
-  border: 1px solid ${theme.colors.GRAY_100};
+  border: 1px solid ${theme.colors.GRAY_HEAD};
 `;
 
 const QuantityButtons = styled.div`
