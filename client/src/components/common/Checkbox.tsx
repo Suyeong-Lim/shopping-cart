@@ -35,13 +35,18 @@ const Checkbox = ({
 const CheckContainer = styled.div`
   display: flex;
   align-items: center;
+  span {
+    margin-left: 8px;
+    font-weight: 400;
+    font-size: ${({ theme }) => theme.fontSize.smtitle};
+  }
 `;
 
 const StyledInput = styled.input`
   appearance: none;
   width: 1.5rem;
   height: 1.5rem;
-  border: 1px solid ${theme.colors.MINT_500};
+  border: 2px solid ${theme.colors.MINT_BLUE};
   border-radius: 0.2rem;
   &:checked {
     border-color: transparent;
@@ -49,7 +54,7 @@ const StyledInput = styled.input`
     background-size: 100% 100%;
     background-position: 50%;
     background-repeat: no-repeat;
-    background-color: ${theme.colors.MINT_500};
+    background-color: ${theme.colors.MINT_BLUE};
   }
 `;
 
