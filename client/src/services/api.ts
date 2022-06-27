@@ -5,6 +5,7 @@ import axios from "axios";
 export const api = axios.create({
   baseURL: API_ENDPOINT,
 });
+api.defaults.withCredential = true;
 
 //products
 //상품 목록 조회
