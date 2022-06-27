@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 
-import { Product, Cart } from "src/types/dto";
-import { addCartItem, getProductItem } from "src/services/api";
-import { convertPrice } from "src/utils/convertPrice";
-import { useCartMutation } from "../../hooks/useCartItemMutation";
+import { Product } from "src/types/dto";
+import { getProductItem } from "src/services/api";
+import { convertPrice } from "src/hooks/useConvert";
+import { useCartMutation } from "../../hooks/api/useCartMutation";
 
 interface ItemProps {
   productItem: Product;
@@ -13,10 +13,6 @@ interface ItemProps {
 
 const ProductDetailCard = ({ productItem }: ItemProps) => {
   const { id, price, name, imageUrl } = productItem;
-
-  const { data } = useQuery(["/product", id], () => {
-    getProductItem(String(id));
-  });
 
   const { addCart } = useCartMutation();
 
