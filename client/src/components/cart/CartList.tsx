@@ -20,8 +20,6 @@ const CartList: React.FC = () => {
   const { totalPrice, totalCount, cartSelectedIdList, isSelectedAll } =
     useCalcCartList(data ?? []);
 
-  if (!data) return <div>No data</div>;
-
   const clickHandler = () => {
     deleteCartList(cartSelectedIdList);
   };
@@ -48,8 +46,8 @@ const CartList: React.FC = () => {
           </S.SelectWrapper>
 
           <div>
-            {data.length > 0 ? (
-              data.map((cartItem) => {
+            {data?.length !== 0 ? (
+              data?.map((cartItem) => {
                 return <CartItems key={cartItem.id} Item={cartItem} />;
               })
             ) : (
