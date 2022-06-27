@@ -29,7 +29,6 @@ export const getServerSideProps: GetServerSideProps<
   ProductDetailParams
 > = async (context) => {
   const { productId } = context.params!;
-  console.log(productId);
 
   const data = await getProductItem(productId);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type { NextPage, GetServerSideProps } from "next";
 import { getCartItems } from "src/services/api";
 import { Cart } from "src/types/dto";
