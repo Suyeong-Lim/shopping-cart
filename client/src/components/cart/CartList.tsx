@@ -17,9 +17,10 @@ const CartList: React.FC = () => {
   const { data } = useQuery("/carts", getCartItems);
   const { deleteCartList, updatedcartSelctedAll } = useCartMutation();
 
-  if (!data) return <div>No data</div>;
   const { totalPrice, totalCount, cartSelectedIdList, isSelectedAll } =
-    useCalcCartList(data);
+    useCalcCartList(data ?? []);
+
+  if (!data) return <div>No data</div>;
 
   const clickHandler = () => {
     deleteCartList(cartSelectedIdList);
