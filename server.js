@@ -9,7 +9,7 @@ const middlewares = jsonServer.defaults();
 const cors = require("cors");
 server.use(
   cors({
-    origin: "https://next-shopping-cart-bice.vercel.app",
+    origin: "https://shopping-cart-bice.vercel.app",
     methods: "GET,POST,PATCH,DELETE,PUT",
     credentials: true,
   })
