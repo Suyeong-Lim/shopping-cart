@@ -1,1 +1,1 @@
-export const API_ENDPOINT = "http://localhost:3003";
+export const API_ENDPOINT = "https://next-shopping-mall.herokuapp.com/";
