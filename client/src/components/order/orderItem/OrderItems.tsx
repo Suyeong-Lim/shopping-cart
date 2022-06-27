@@ -26,7 +26,7 @@ const OrderItems: React.FC<OrderDetailProps> = ({ Item, type }) => {
         </S.BoxHeader>
 
         {orderDetails.map(({ id, price, name, imageUrl, quantity }) => (
-          <S.ItemContainer>
+          <S.ItemContainer key={id}>
             <S.Image src={imageUrl} />
             <S.Desc>
               <p>{name}</p>
