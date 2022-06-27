@@ -4,5 +4,5 @@ export const URL = {
   HOME: () => "/",
   PRODUCT_DETAIL: (productId: string | number) => `/products/${productId}`,
   CART: () => "/cart",
-  ORDER: () => "/order",
+  ORDER: () => "/orders",
 } as const;
