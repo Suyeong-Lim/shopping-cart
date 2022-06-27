@@ -1,3 +1,11 @@
+// json-server
+const path = require("path");
+const jsonServer = require("json-server");
+const server = jsonServer.create();
+const router = jsonServer.router(path.join(__dirname, "db.json"));
+const middlewares = jsonServer.defaults();
+
+//cors 세팅
 const cors = require("cors");
 server.use(
   cors({
@@ -6,13 +14,6 @@ server.use(
     credentials: true,
   })
 );
-
-// json-server
-const path = require("path");
-const jsonServer = require("json-server");
-const server = jsonServer.create();
-const router = jsonServer.router(path.join(__dirname, "db.json"));
-const middlewares = jsonServer.defaults();
 
 // lowdb
 const low = require("lowdb");
