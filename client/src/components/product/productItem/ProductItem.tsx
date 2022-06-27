@@ -3,10 +3,9 @@ import styled from "styled-components";
 import Link from "next/link";
 import { URL } from "src/utils/url";
 import { Product } from "src/types/dto";
-import { convertName, convertPrice } from "./hook/useConvert";
+import { convertName, convertPrice } from "../../../hooks/useConvert";
 import { BsCart4 } from "react-icons/bs";
-import { useCartMutation } from "../../hooks/useCartItemMutation";
-import { useQuery } from "react-query";
+import { useCartMutation } from "../../../hooks/api/useCartMutation";
 
 interface Props {
   product: Product;
@@ -51,32 +50,33 @@ const Container = styled.div`
 
 const InfoContainer = styled.div`
   display: flex;
-  padding: 10px;
+  justify-content: space-between;
 `;
 
 const Info = styled.div`
-  flex: 9;
+  display: flex;
+  flex-direction: column;
   padding: 10px 15px;
 `;
 
 const Name = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.title};
+  font-size: ${({ theme }) => theme.fontSize.text};
   padding-bottom: 5px;
   margin-bottom: 10px;
   height: 21px;
+  line-height: 24px;
 `;
 
 const Price = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.text};
+  font-size: ${({ theme }) => theme.fontSize.smtitle};
   font-weight: 500;
 `;
 
 const CartButton = styled.button`
-  flex: 1;
   padding: 15px;
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.ORANGE_700};
+    background-color: ${({ theme }) => theme.colors.CYAN};
     color: ${({ theme }) => theme.colors.WHITE};
   }
 `;
