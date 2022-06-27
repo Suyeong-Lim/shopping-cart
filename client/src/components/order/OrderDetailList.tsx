@@ -23,8 +23,7 @@ const OrderDetail = () => {
     <div>
       {data && (
         <S.Wrapper>
-          <OrderItems Item={data} />
-
+          <OrderItems type={"list"} Item={data} />
           <S.InfoWrapper>
             <InfoWindow
               title="결제금액 정보"

@@ -1,14 +1,16 @@
 import React from "react";
-import { useReducer } from "react";
 import { Order } from "src/types/dto";
 import * as S from "./style";
 import { convertPrice } from "src/hooks/useConvert";
 import { useRouter } from "next/router";
-interface Props {
+
+interface OrderDetailProps {
   Item: Order;
+
   type: "list" | "detail";
 }
-const OrderItems: React.FC<Props> = ({ Item, type }: Props) => {
+
+const OrderItems: React.FC<OrderDetailProps> = ({ Item, type }) => {
   const { id, orderDetails } = Item;
   const router = useRouter();
   return (
