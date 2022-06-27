@@ -78,15 +78,16 @@ export const deleteSelectedCarts = async (cartIdList: number[]) => {
 /**주문 order-services */
 
 export const getOrderList = async () => {
-  const data = await api.get<Order[]>("/orders");
-  return data;
+  const response = await api.get<Order[]>("/orders");
+  return response.data;
 };
 
 export const getOrderItem = async (orderId: string) => {
-  const data = await api.get<Order>(`/olders/${orderId}`);
+  const response = await api.get<Order>(`/orders/${orderId}`);
+  return response.data;
 };
 
 export const addOrder = async (orderDetails: OrderItem[]) => {
-  const data = await api.post<OrderItem[]>(`/orders`, { orderDetails });
+  const data = await api.post<OrderItem[]>("/orders", { orderDetails });
   return data;
 };
