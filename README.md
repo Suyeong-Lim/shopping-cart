@@ -60,17 +60,6 @@ Vite + Next + TS + React-Query 로 장바구니 구현해보기
 
 
 
-## 🗺 구현 기능
-
-1. 첫 번째 기능
-
-   <img width="500" src="https://bit.ly/3HyINHE" />
-
-2. 두 번째 기능
-
-   <img width="500" src="https://bit.ly/3HyINHE" />
-
-
 ## ⚙ 설치
 
 ```
