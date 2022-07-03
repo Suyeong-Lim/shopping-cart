@@ -1,81 +1,9 @@
 이 레포는 우아한 테크코스 과제를 구현한 결과물입니다.
 Next.js / React-query 와 Json-server 를 통해 장바구니 담기, 주문 기능이 있는 애플리케이션 기능을 구현한 과정과, 참고할 만한 지식들을 정리했습니다.
 
-#### tree
-
-```JS
-├── components
-│   ├── Layout
-│   │   └── Layout.tsx
-│   ├── cart
-│   │   ├── CartList.tsx
-│   │   ├── cartItem
-│   │   │   └── CartItems.tsx
-│   │   └── style.ts
-│   ├── common
-│   │   ├── Button.tsx
-│   │   ├── Checkbox.tsx
-│   │   └── ErrorBanner.tsx
-│   ├── gnb
-│   │   └── Gnb.tsx
-│   ├── info
-│   │   ├── InfoWindow.tsx
-│   │   └── style.ts
-│   ├── order
-│   │   ├── OrderDetailList.tsx
-│   │   ├── OrderList.tsx
-│   │   ├── orderItem
-│   │   │   ├── OrderItems.tsx
-│   │   │   └── style.ts
-│   │   └── style.ts
-│   ├── payments
-│   │   ├── Payments.tsx
-│   │   ├── paymentsItem
-│   │   │   ├── PaymentsItem.tsx
-│   │   │   └── style.ts
-│   │   └── style.ts
-│   └── product
-│       ├── ProductDetailCard.tsx
-│       ├── ProductList.tsx
-│       └── productItem
-│           ├── ProductItem.tsx
-│           └── style.ts
-├── hooks
-│   ├── api
-│   │   ├── useCartMutation.ts
-│   │   └── useOrderMutation.ts
-│   ├── useCalcCartList.ts
-│   └── useConvert.ts
-├── pages
-│   ├── _app.tsx
-│   ├── cart
-│   │   └── index.tsx
-│   ├── index.tsx
-│   ├── orderComplete.tsx
-│   ├── orders
-│   │   ├── [orderId].tsx
-│   │   └── index.tsx
-│   ├── payments.tsx
-│   └── products
-│       └── [productId].tsx
-├── services
-│   └── api.ts
-├── styles
-│   ├── GlobalStyles.ts
-│   ├── breakpoints.ts
-│   ├── media.ts
-│   ├── styled.d.ts
-│   └── theme.ts
-├── types
-│   └── dto.ts
-└── utils
-    ├── constants.ts
-    └── url.ts
-```
-
 ### 🕹️ 실행 방법
 
-```JS
+```js
 // 필요한 dependency 설치
 npm i or yarn
 
@@ -106,7 +34,7 @@ CSS-In-JS 인 Styled-Component 를 설치
 
 `yarn add --save-dev babel-plugin-styled-components`
 
-```JS
+```js
 {
 
 "presets": ["next/babel"],
@@ -151,202 +79,12 @@ Next.js 9 버전부터 pages 디렉토리를 src 디렉토리 하위에 놓는�
 `types` 에는 타입스크립트이므로 각 api 명세에 맞는 타입들을 정의해줍니다.
 `utills` 에는 공용으로 사용하는 API_ENDPOINT 와 페이지의 URL을 상수화 하여 관리하는 코드를 작성합니다.
 
-## 3. Styled-component & Theme 설정
+## 3. API 설정
 
-### GlobalStyle
-
-```JS
-import { createGlobalStyle } from "styled-components";
-
-import reset from "styled-reset";
-
-
-
-const GlobalStyles = createGlobalStyle`
-
-${reset}
-
-* {
-
-box-sizing: border-box;
-
-}
-
-body{
-
-font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-
-}
-
-a {
-
-color: inherit;
-
-text-decoration: none;
-
-}
-
-input, button {
-
-background-color: transparent;
-
-border: none;
-
-outline: none;
-
-}
-
-h1, h2, h3, h4, h5, h6{
-
-font-family:'Maven Pro', sans-serif;
-
-}
-
-@media only screen and (max-width: 768px) {
-
-body {
-
-font-size: 12px;
-
-}
-
-}
-
-@media only screen and (max-width: 576px) {
-
-body {
-
-font-size: 10px;
-
-}
-
-}
-
-`;
-
-export default GlobalStyles;
-```
-
-styled-reset을 사용하여 reset과 글로벌에 기본적인 미디어 쿼리를 함께 작성해주었습니다.
-
-### Theme
-
-```JS
-import { DefaultTheme } from "styled-components";
-
-export const colors = {
-
-WHITE: "#FFF",
-
-BLACK: "#000",
-
-BLACK_OPACITY_70: "rgba(0,0,0,0.7)",
-
-BLACK_OPACITY_25: "rgba(0,0,0,0.25)",
-
-BLACK_TEXT: "#333333",
-
-GRAY_10: "#AAAAAA",
-
-GRAY_HEAD: "#F6F6F6",
-
-GRAY_900_OPACITY_55: "rgba(30, 30, 30, 0.55)",
-
-ORANGE_700: "#F37D3B",
-
-CYAN: "#94DACD",
-
-MINT_BLUE: "#2ac1bc",
-
-};
-
-export const fontSize = {
-
-bigTitle: "28px",
-
-title: "20px",
-
-smtitle: "18px",
-
-text: "16px",
-
-smallText: "14px",
-
-};
-
-export type ColorsTypes = typeof colors;
-export type FontSizeTypes = typeof fontSize;
-const theme: DefaultTheme = {
-
-colors,
-
-fontSize,
-
-};
-
-export default theme;
-```
-
-프로젝트에서 사용할 color 와 fontSize 를 정의해주었습니다.
-theme 에 대한 인터페이스 타입은 styled.d.ts 에 정의해주었습니다.
-
-```JS
-import { ColorsTypes, FontSizeTypes } from "./theme";
-declare module "styled-components" {
-
-export interface DefaultTheme {
-
-colors: ColorsTypes;
-
-fontSize: FontSizeTypes;
-
-}}
-```
-
-```JS
-import { ThemeProvider } from "styled-components";
-
-import GlobalStyles from "src/styles/GlobalStyles";
-
-import theme from "src/styles/theme";
-
-import Layout from "src/components/Layout/Layout";
-
-
-
-function MyApp({ Component, pageProps }: AppProps) {
-
-
-return (
-
-<ThemeProvider theme={theme}>
-
-<GlobalStyles />
-
-<Layout>
-
-<Component {...pageProps} />
-
-</Layout>
-
-</ThemeProvider>
-
-);
-
-}
-
-export default MyApp;
-
-```
-
-`_app.tsx ` 에서 ThemeProvider 에 theme을 주입하여 사용할 수 있습니다.
-
-## 4. API 설정
-
-서버는 미리 제공된 Json-server 를 사용했습니다.
+서버는 미리 제공된 json-server 를 사용했습니다.
 HTTP 비동기 통신 라이브러리로는 axios 를 사용했습니다.
 
-```JS
+```js
 import { Product, Cart, Order, OrderItem } from "src/types/dto";
 
 import { API_ENDPOINT } from "../utils/constants";
@@ -354,9 +92,7 @@ import { API_ENDPOINT } from "../utils/constants";
 import axios from "axios";
 
 export const api = axios.create({
-
-baseURL: API_ENDPOINT,
-
+  baseURL: API_ENDPOINT,
 });
 
 api.defaults.withCredentials = true;
@@ -367,15 +103,13 @@ api.defaults.withCredentials = true;
 axios 의 인스턴스를 생성해서 api 라는 변수에 담고 API 를 반환합니다.  
 (withCredentials = true 는 cors 에러를 해결하기 위해 추가해주었습니다.)
 
-```JS
+```js
 //상품 단일 조회
 
 export const getProductItem = async (itemId: string) => {
+  const response = (await api.get) < Product > `products/${itemId}`;
 
-const response = await api.get<Product>(`products/${itemId}`);
-
-return response.data;
-
+  return response.data;
 };
 ```
 
@@ -383,25 +117,21 @@ return response.data;
 
 그러나 `async await` 을 사용하면 promise 의 단점을 보완하여 프로미스의 후처리 메소드 없이 동기 처리처럼 프로미스가 처리 결과를 반환하도록 구현할 수 있습니다.
 
-```JS
+```js
 export const addCartItem = async (product: Product) => {
+  try {
+    const res = (await api.post) < Product > ("/carts", { product });
 
-try {
-
-const res = await api.post<Product>("/carts", { product });
-
-return res.data;
-
-} catch {
-
-console.log("product 추가 에러");
-
-}};
+    return res.data;
+  } catch {
+    console.log("product 추가 에러");
+  }
+};
 ```
 
 Error Hanldling 을 위해 try-catch 문을 사용하고 싶다면 위와 같이 사용이 가능합니다.
 
-## 5. React-Query
+## 4. React-Query
 
 ### 🤔 React-Query를 사용한 이유...
 
@@ -429,32 +159,24 @@ React-Query 는 React 앱에서 서버 상태를 가져오고 캐싱, 동기화,
 
 client 를 생성하고 생성한 client 를 QueryClientProvider 를 통해 앱에 제공해줍니다.
 
-```JS
+```js
 function MyApp({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient());
 
-const [queryClient] = useState(() => new QueryClient());
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
 
-return (
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
 
-<ThemeProvider theme={theme}>
-
-<GlobalStyles />
-
-<QueryClientProvider client={queryClient}>
-
-<Component {...pageProps} />
-
-<ReactQueryDevtools initialIsOpen={false} />
-
-</QueryClientProvider>
-
-</ThemeProvider>
-
-);
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </ThemeProvider>
+  );
 }
 
 export default MyApp;
-
 ```
 
 queryClient 를 생성했으면 리액트 쿼리가 제공하는 `query` 를 사용할 수 있게 된 것입니다.
@@ -464,13 +186,13 @@ queryClient 를 생성했으면 리액트 쿼리가 제공하는 `query` 를 사
 - **query** : 유니크한 key 에 바인딩된 비동기 데이터를 가져오는 선언적 종속성으로 데이터를 fetch 하는 모든 프로미스 기반 메서드 (get,post)와 함께 사용할 수 있습니다. (만약 서버 데이터를 수정하는 경우에는 mutation을 사용하여 수정할 수 있습니다.)
 - **useQuery** : useQuery 훅을 사용하여 컴포넌트에서 쿼리를 호출하여 사용할 수 있습니다. (각 쿼리당 유니크한 키 데이터와 프로미스를 반환하는 함수를 지정하여 사용하면 됩니다.)
 
-```JS
+```js
 const { data } = useQuery("/carts", getCartItems);
 ```
 
 위와 같이 `useQuery`를 사용하여 아래의 카트의 데이터를 get 해올 수 있습니다.
 
-```JS
+```js
 //clent > src > services > api.ts의 getCartItems
 export const getCartItems = async () => {
 try {
@@ -483,23 +205,23 @@ console.log(`cartItem fetch 에러${error}`);
 
 또한 `useQuery`의 경우 반환된 쿼리 결과에 쿼리의 현재 status가 포함되어있어 상태에 따른 분기처리가 쉽게 가능합니다.
 
-```JS
-	const {status, data, error} = useQuery("todos",fetchTodoList)
+```js
+const { status, data, error } = useQuery("todos", fetchTodoList);
 
-	if(status ==="loading"){
-		return <span>Loading...</span>
-	}
-	if(status ==="error"){
-		return <span>Error: {error.message}</span>
-	}
+if (status === "loading") {
+  return <span>Loading...</span>;
+}
+if (status === "error") {
+  return <span>Error: {error.message}</span>;
+}
 
-	return(
-		<ul>
-			{data.map(todo=>(
-				<li key={todo.id}>{todo.title}</li>
-			))}
-		</ul>
-	)
+return (
+  <ul>
+    {data.map((todo) => (
+      <li key={todo.id}>{todo.title}</li>
+    ))}
+  </ul>
+);
 ```
 
 #### Mutations
@@ -508,22 +230,20 @@ console.log(`cartItem fetch 에러${error}`);
 
 카트에 담긴 목록을 삭제하는 클릭핸들러에서 deleteCartList 를 호출해 주었습니다.
 
-```JS
+```js
 const { deleteCartList, updatedcartSelctedAll } = useCartMutation();
 
 const clickHandler = () => {
-deleteCartList(cartSelectedIdList);
+  deleteCartList(cartSelectedIdList);
 };
 ```
 
 deleteCartList 는 useCartMutation 에 정의된 useMutaion 함수의 반환값이며 선택한 카트리스트의 아이디 값을 넘겨 받아 카트를 삭제하는 deleteCarts 를 호출합니다.
 
-```JS
+```js
 const deleteCartListMutation = useMutation(
+  (cartIdList: number[]) => deleteCarts(cartIdList),
 
-(cartIdList: number[]) => deleteCarts(cartIdList),
-
-afterMutaitionHandler
-
+  afterMutaitionHandler
 );
 ```
