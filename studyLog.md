@@ -136,7 +136,7 @@ CSS-In-JS 인 Styled-Component 를 설치
 
 디렉토리 구조는 다음과 같습니다.
 
-<img src="README.assets/directory_structure.png" alt="directoryStructure" />
+<img src="README.assets/directory_structure.png" alt="directoryStructure" width="40%" />
 
 pages 디렉토리를 src 하위로 이동하였습니다.
 Next.js 9 버전부터 pages 디렉토리를 src 디렉토리 하위에 놓는것을 공식적으로 지원해주고 있습니다. [공식문서 참고](https://nextjs.org/blog/next-9-1#src-directory-support)
