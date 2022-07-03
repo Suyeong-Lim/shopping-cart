@@ -3,7 +3,6 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "src/styles/GlobalStyles";
 import theme from "src/styles/theme";
-import Gnb from "src/components/gnb/Gnb";
 import { QueryClientProvider, QueryClient, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Layout from "src/components/Layout/Layout";

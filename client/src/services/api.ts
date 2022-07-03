@@ -27,7 +27,9 @@ export const getCartItems = async () => {
   try {
     const response = await api.get<Cart[]>("carts");
     return response.data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(`cartItem fetch 에러${error}`);
+  }
 };
 
 export const addCartItem = async (product: Product) => {
