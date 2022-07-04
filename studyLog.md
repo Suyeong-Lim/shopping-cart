@@ -13,8 +13,12 @@ yarn server
 // cd client
 yarn run dev
 ```
+---
+<br/>
 
 ## 주요 구현 과정
+
+<br/>
 
 ## 1. 프로젝트 설정
 
@@ -25,6 +29,9 @@ Next.js 프로젝트를 TS로 설치
 
 CSS-In-JS 인 Styled-Component 를 설치
 `yarn add styled-components && npm i -D @types/styled-components`
+
+<br/>
+
 
 ### 바벨 (Babel JS) 설정
 
@@ -58,10 +65,10 @@ CSS-In-JS 인 Styled-Component 를 설치
 }
 ```
 
----
+<br/>
 
 ## 2. 디렉토리 구조
-
+---
 디렉토리 구조는 다음과 같습니다.
 
 <img src="README.assets/directory_structure.png" alt="directoryStructure" width="40%" />
@@ -79,8 +86,10 @@ Next.js 9 버전부터 pages 디렉토리를 src 디렉토리 하위에 놓는�
 `types` 에는 타입스크립트이므로 각 api 명세에 맞는 타입들을 정의해줍니다.
 `utills` 에는 공용으로 사용하는 API_ENDPOINT 와 페이지의 URL을 상수화 하여 관리하는 코드를 작성합니다.
 
-## 3. API 설정
+<br/>
 
+## 3. API 설정
+---
 서버는 미리 제공된 json-server 를 사용했습니다.
 HTTP 비동기 통신 라이브러리로는 axios 를 사용했습니다.
 
@@ -131,7 +140,10 @@ export const addCartItem = async (product: Product) => {
 
 Error Hanldling 을 위해 try-catch 문을 사용하고 싶다면 위와 같이 사용이 가능합니다.
 
+<br/>
+
 ## 4. React-Query
+---
 
 ### 🤔 React-Query를 사용한 이유...
 
@@ -149,7 +161,11 @@ React-Query 는 React 앱에서 서버 상태를 가져오고 캐싱, 동기화,
 
 또한 react-hook 과 사용하는 구조가 비슷하여 적용이 어렵지 않다고 느껴졌습니다.
 
+<br/>
+
 ### React-Query 사용하기
+---
+<br/>
 
 #### Install
 
