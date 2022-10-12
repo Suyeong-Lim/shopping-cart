@@ -30,7 +30,7 @@ const CartItems: React.FC<Props> = ({ Item }) => {
           onChange={() => updateSelected(Item)}
           checked={selected}
         />
-        <Image src={imageUrl} />
+        <Image src={imageUrl} alt="product item" />
         <span>{name}</span>
       </LeftContainer>
 

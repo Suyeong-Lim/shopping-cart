@@ -1,4 +1,5 @@
 import type { NextPage, GetServerSideProps } from "next";
+import { dehydrate, QueryClient } from "react-query";
 import { getProduct } from "src/services/api";
 import { Product } from "src/types/dto";
 import ProductList from "src/components/product/ProductList";
@@ -12,21 +13,18 @@ interface ProductProps {
 const Home: NextPage<ProductProps> = ({ productList }) => {
   return (
     <Conatiner>
-      {productList.length === 0 ? (
-        <div>Loading</div>
-      ) : (
-        <ProductList productList={productList} />
-      )}
+      <ProductList productList={productList} />
     </Conatiner>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const productData = await getProduct();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery("/products", getProduct);
 
   return {
     props: {
-      productList: productData,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };

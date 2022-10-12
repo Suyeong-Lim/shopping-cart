@@ -1,6 +1,5 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { useRouter } from "next/router";
 import CartItems from "./cartItem/CartItems";
 import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
@@ -13,16 +12,20 @@ import ErrorBanner from "../common/ErrorBanner";
 import Link from "next/link";
 
 const CartList: React.FC = () => {
-  const router = useRouter();
-  const { data } = useQuery("/carts", getCartItems);
-  const { deleteCartList, updatedcartSelctedAll } = useCartMutation();
+  const { status, data } = useQuery("/carts", getCartItems);
 
+  const { deleteCartList, updatedcartSelctedAll } = useCartMutation();
   const { totalPrice, totalCount, cartSelectedIdList, isSelectedAll } =
     useCalcCartList(data ?? []);
 
   const clickHandler = () => {
     deleteCartList(cartSelectedIdList);
   };
+
+  //TODO: status 추가
+  if (status === "error") {
+    return <>Error</>;
+  }
 
   return (
     <>
