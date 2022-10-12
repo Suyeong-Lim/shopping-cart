@@ -10,7 +10,7 @@ interface CartProps {
   cartListData: Cart[];
 }
 
-const CartListPage: NextPage<CartProps> = ({ cartListData }) => {
+const CartListPage: NextPage<CartProps> = () => {
   return (
     <>
       <Head>
@@ -23,7 +23,6 @@ const CartListPage: NextPage<CartProps> = ({ cartListData }) => {
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const queryClient = new QueryClient();
-
   await queryClient.prefetchQuery("/carts", getCartItems);
 
   return {

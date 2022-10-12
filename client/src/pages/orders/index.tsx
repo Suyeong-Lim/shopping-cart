@@ -9,7 +9,7 @@ interface OrderProps {
   orderList: OrderItem[];
 }
 
-const Order: NextPage<OrderProps> = ({ orderList }) => {
+const Order: NextPage<OrderProps> = () => {
   return (
     <>
       <OrderList />
@@ -18,10 +18,11 @@ const Order: NextPage<OrderProps> = ({ orderList }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const orderListData = await getOrderList();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery("/orders", getOrderList);
   return {
     props: {
-      orderList: orderListData,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };

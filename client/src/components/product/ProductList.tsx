@@ -1,17 +1,27 @@
 import React from "react";
+import { useQuery } from "react-query";
 import { Product } from "src/types/dto";
+import { getProduct } from "src/services/api";
 import styled from "styled-components";
 import ProductItem from "./productItem/ProductItem";
 
 interface ProductListProps {
   productList: Product[];
 }
-const ProductList: React.FC<ProductListProps> = ({ productList }) => {
+const ProductList: React.FC<ProductListProps> = () => {
+  const { status, data } = useQuery<Product[]>("/products", getProduct);
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+  if (status === "error") {
+    return <span>Error...</span>;
+  }
   return (
     <Container>
-      {productList.map((product) => {
-        return <ProductItem key={product.id} product={product} />;
-      })}
+      {data &&
+        data.map((product) => {
+          return <ProductItem key={product.id} product={product} />;
+        })}
     </Container>
   );
 };

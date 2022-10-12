@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { GetServerSideProps, NextPage } from "next";
+import { dehydrate, QueryClient } from "react-query";
 import { getCartItems } from "src/services/api";
 import { Cart } from "src/types/dto";
 import Payments from "src/components/payments/Payments";
@@ -21,11 +22,12 @@ const PaymentsPage: NextPage<PaymentsProps> = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const cartData = await getCartItems();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery("/cart", getCartItems);
 
   return {
     props: {
-      cartList: cartData,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };

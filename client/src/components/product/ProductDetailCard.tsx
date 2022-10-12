@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery } from "react-query";
-
 import { Product } from "src/types/dto";
 import { getProductItem } from "src/services/api";
 import { convertPrice } from "src/hooks/useConvert";
@@ -24,7 +23,7 @@ const ProductDetailCard = ({ productItem }: ItemProps) => {
 
   return (
     <ProductContainer>
-      <Image src={imageUrl} />
+      <Image src={imageUrl} alt="product Iamge" />
       <ProductName>{name}</ProductName>
       <Line />
       <ProductPrice>
